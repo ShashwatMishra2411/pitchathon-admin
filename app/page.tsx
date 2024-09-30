@@ -31,7 +31,7 @@ export default function Page() {
     female: "0",
     total: "0",
   });
-  const [result, setResult] = useState<IDetectedBarcode>();
+  // const [result, setResult] = useState<IDetectedBarcode>();I
   const [value, setValue] = useState({
     TeamID: "",
     ParticipantID: "",
@@ -53,7 +53,7 @@ export default function Page() {
   async function handleScan(result: IDetectedBarcode) {
     if (result.rawValue.length > 0 && allow) {
       // Ensure scanning is only allowed when `allow` is true
-      setResult(result);
+      // setResult(result);
       console.log(result.rawValue);
       try {
         const jsonString = result.rawValue
