@@ -22,7 +22,9 @@ export async function POST(req: NextRequest) {
         let present;
         if (pres.rows.length > 0) {
             present = !pres.rows[0].present;
+            console.log(teamid, participantid, present)
             const result = await pool.query('Update Participants set present=$1 where teamID=$2 AND participantID=$3', [present, teamid, participantid]);
+            console.log(result.rows[0]);
             return new NextResponse(JSON.stringify(result.rows[0]), { status: 201 });
         } else {
             present = true;
