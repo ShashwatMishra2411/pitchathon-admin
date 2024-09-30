@@ -81,6 +81,7 @@ export default function Page() {
             headers: {
               "Content-Type": "application/json",
             },
+            cache: "no-store", // Disable caching in the fetch request
           });
           const res = await resp.json();
           setData(res);
@@ -125,6 +126,7 @@ export default function Page() {
         headers: {
           "Content-Type": "application/json",
         },
+        cache: "no-store", // Disable caching in the fetch request
       });
       const res = await response.json();
       setData(res);
