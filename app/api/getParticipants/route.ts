@@ -1,8 +1,7 @@
-import { NextApiRequest, NextApiResponse } from 'next';
 import pool from '@/lib/db'; // Import the connection pool
 import { NextResponse } from 'next/server';
 
-export async function GET(req: NextApiRequest, res: NextApiResponse) {
+export async function GET() {
     try {
         // Example query to fetch data
         // console.log(req.type);
@@ -16,7 +15,8 @@ export async function GET(req: NextApiRequest, res: NextApiResponse) {
         }), { status: 200 });
     } catch (error) {
         console.error('Error fetching participants:', error);
-        res.status(500).json({ error: 'Failed to fetch participants' });
+        return new NextResponse("Failed", { status: 500 });
+        // res.status(500).json({ error: 'Failed to fetch participants' });
     }
 }
 
