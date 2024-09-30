@@ -6,8 +6,8 @@ export async function GET(req: NextApiRequest, res: NextApiResponse) {
     try {
         // Example query to fetch data
         // console.log(req.type);
-        const result1 = await pool.query('SELECT Count(*) FROM Participants where gender=$1 and present=true', ['male']);
-        const result2 = await pool.query('SELECT Count(*) FROM Participants where gender=$1 and present=true', ['female']);
+        const result1 = await pool.query('SELECT Count(*) FROM Participants where gender=$1 and present=true', ['Male']);
+        const result2 = await pool.query('SELECT Count(*) FROM Participants where gender=$1 and present=true', ['Female']);
         const result3 = await pool.query('SELECT Count(*) FROM Participants');
         return new NextResponse(JSON.stringify({
             male: result1.rows[0].count,
