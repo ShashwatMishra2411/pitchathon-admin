@@ -76,6 +76,14 @@ export default function Page() {
             }),
           });
           console.log(response.body);
+          const resp = await fetch("/api/getParticipants", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+          const res = await resp.json();
+          setData(res);
         } catch (error) {
           toast.error("Failed to save the result", {
             position: "top-right",
