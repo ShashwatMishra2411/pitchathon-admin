@@ -121,13 +121,17 @@ export default function Page() {
   async function handleClick() {
     setLoading(true);
     try {
-      const response = await fetch("/api/getParticipants", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        cache: "no-store", // Disable caching in the fetch request
-      });
+      const timestamp = new Date().getTime(); // Generate a unique timestamp
+      const response = await fetch(
+        `/api/getParticipants?cacheBust=${timestamp}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          cache: "no-store", // Disable caching in the fetch request
+        }
+      );
       const res = await response.json();
       setData(res);
       console.log(res);
@@ -139,13 +143,10 @@ export default function Page() {
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
       });
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   }
   // const notify = () => toast("Wow so easy!");
   return (
