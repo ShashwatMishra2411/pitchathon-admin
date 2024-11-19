@@ -5,14 +5,14 @@ import pool from '@/lib/db'; // Import the connection pool
 export async function POST(req: NextRequest) {
     try {
         // Parse the incoming request body
-        const { teamid, participantid, gender } = await req.json();
+        const { teamid, participantid, gender }: { teamid: string, participantid: string, gender: string } = await req.json();
 
         if (!teamid || !participantid || !gender) {
             return new NextResponse("Missing required fields", { status: 400 });
         }
 
         // console.log(teamid, participantid, gender);
-        const gen = gender.toLowerCase();
+        const gen = gender.charAt(0).toUpperCase + gender.substring(1).toLowerCase();
 
         // Check if the participant already exists
         const pres = await pool.query(
@@ -22,9 +22,9 @@ export async function POST(req: NextRequest) {
         let present;
         if (pres.rows.length > 0) {
             present = !pres.rows[0].present;
-            console.log(teamid, participantid, present)
+            // console.log(teamid, participantid, present)
             const result = await pool.query('Update Participants set present=$1 where teamID=$2 AND participantID=$3', [present, teamid, participantid]);
-            console.log(result.rows[0]);
+            // console.log(result.rows[0]);
             return new NextResponse(JSON.stringify(result.rows[0]), { status: 201 });
         } else {
             present = true;
