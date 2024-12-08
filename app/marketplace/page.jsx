@@ -46,7 +46,6 @@ export default function Page() {
       setList(res);
     };
     fetchData();
-    console.log("Hello");
     const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
     setCart(savedCart);
   }, []);
